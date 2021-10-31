@@ -33,10 +33,10 @@ namespace AZStorage
                 //}
                 #endregion
                 #region Receive Message and Delete Message
-                QueueMessage queueMessage = queueclient.ReceiveMessage();
-                Console.WriteLine($"The Received Message - {queueMessage.Body}");
-                queueclient.DeleteMessage(queueMessage.MessageId, queueMessage.PopReceipt);
-                Console.WriteLine("Message Deleted.");
+                //QueueMessage queueMessage = queueclient.ReceiveMessage();
+                //Console.WriteLine($"The Received Message - {queueMessage.Body}");
+                //queueclient.DeleteMessage(queueMessage.MessageId, queueMessage.PopReceipt);
+                //Console.WriteLine("Message Deleted.");
                 #endregion
             }
 
