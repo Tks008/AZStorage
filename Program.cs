@@ -1,4 +1,5 @@
 ﻿using Azure.Storage.Queues;
+using Azure.Storage.Queues.Models;
 using System;
 
 namespace AZStorage
@@ -11,13 +12,34 @@ namespace AZStorage
         {
             QueueClient queueclient = new QueueClient(connectionstring, queuname);
 
-            string _mesg = string.Empty;
-            for (int i = 0; i < 5; i++)
+            if (queueclient.Exists())
             {
-                queueclient.SendMessage($"Message {i + 1}");
+                #region Push Message
+                //string _mesg = string.Empty;
+                //for (int i = 0; i < 5; i++)
+                //{
+                //    queueclient.SendMessage($"Message {i + 1}");
+                //}
+                //Console.WriteLine("Message sent.");
+                #endregion
+
+                #region Peek Message
+                //PeekedMessage[] peekMessage = queueclient.PeekMessages(2);
+                //foreach (var _qmessage in peekMessage)
+                //{
+                //    Console.WriteLine($"MessageID-{ _qmessage.MessageId}");
+                //    Console.WriteLine($"InsertedOn-{ _qmessage.InsertedOn}");
+                //    Console.WriteLine($"Body-{ _qmessage.Body}");
+                //}
+                #endregion
+                #region Receive Message and Delete Message
+                QueueMessage queueMessage = queueclient.ReceiveMessage();
+                Console.WriteLine($"The Received Message - {queueMessage.Body}");
+                queueclient.DeleteMessage(queueMessage.MessageId, queueMessage.PopReceipt);
+                Console.WriteLine("Message Deleted.");
+                #endregion
             }
 
-            Console.WriteLine("Message sent.");
             Console.ReadKey();
         }
     }
