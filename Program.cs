@@ -15,12 +15,15 @@ namespace AZStorage
             if (queueclient.Exists())
             {
                 #region Push Message
-                //string _mesg = string.Empty;
-                //for (int i = 0; i < 5; i++)
-                //{
-                //    queueclient.SendMessage($"Message {i + 1}");
-                //}
-                //Console.WriteLine("Message sent.");
+                string _mesg = string.Empty,_temp_msg=string.Empty;
+                for (int i = 0; i < 5; i++)
+                {
+                    _temp_msg = $"Message {i + 1}";
+                    var txtbyte = System.Text.Encoding.UTF8.GetBytes(_temp_msg);
+                    _mesg = System.Convert.ToBase64String(txtbyte);
+                    queueclient.SendMessage(_mesg);
+                }
+                Console.WriteLine("Message sent.");
                 #endregion
 
                 #region Peek Message
